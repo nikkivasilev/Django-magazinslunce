@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <section class="ProductPaginator">
+        <div class="actionBtnPaginator">
+        {% if page_obj.has_previous %}
+            <a href="?page=1"><<</a>
+            <a href="?page={{ page_obj.previous_page_number }}"><</a>
+        {% else %}
+            <a><<</a>
+            <a><</a>
+        {% endif %}
+        PAGE {{ page_obj.number }} OF {{ page_obj.paginator.num_pages }}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">>></a>
+        {% else %}
+            <a>></a>
+            <a>>></a>
+        {% endif %}
+        </div>
+    </section>
+    <section id="catalogPage">
+        {% if object_list %}
+            {% for object in object_list %}
+                <div class="card-box">
+                    <img class="ProductImg" src="{{ object.Image.url }}" alt="profile picture">
+                    <div>
+                        <div class="text-center ">
+                            <p class="name">Name: {{ object.name }}</p>
+                            <p class="price">Price: {{ object.price|floatformat:2 }}BGN</p>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{% url 'details product' pk=object.pk %}">Details</a>
+                            <a href="{% url 'add product to basket' pk=object.pk %}" class="remove">Add to basket</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No Products in Catalog!</p>
+        {% endif %}
+    </section>
+{% endblock %}

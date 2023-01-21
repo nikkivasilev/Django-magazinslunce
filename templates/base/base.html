@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Magazin Slunce</title>
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+<div id="box">
+    <header>
+        <nav>
+            <img src="{% static 'images/contrast.png' %}" alt="sun">
+            <a href="{% url 'index' %}">HOME</a>
+            <ul>
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'basket' %}">
+                            <img
+                                    src="{% static 'images/shopping-basket.png' %}"
+                                    alt="basket" style="width: 40px">
+                        </a>
+                    </li>
+                    <li><a href="{% url 'catalogue' %}">CATALOGUE</a></li>
+                    <li><a href="{% url 'details user' pk=request.user.pk %}">PROFILE</a></li>
+                    <li><a href="{% url 'logout user' %}">LOG OUT</a></li>
+
+                {% else %}
+                    <li><a href="{% url 'register user' %}">REGISTER</a></li>
+                    <li><a href="{% url 'login user' %}">LOG IN</a></li>
+                {% endif %}
+                {% if request.user.is_staff %}
+                    <li><a href="/admin">STAFF</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+
+    {% block page_content %}
+
+    {% endblock %}
+
+    <footer>
+        <div>
+            &copy;Magazin Slunce. All rights reserved.
+        </div>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% include 'base/base.html' %}
+{% block page_content %}
+<section id="detailsPage">
+    <div class="wrapper">
+        <div class="profileText">
+            <h1 style="margin-bottom: 28px">Are you sure you want to delete your profile?</h1>
+            <form method="post" action="{% url 'delete user' pk=request.user.pk %}">
+                {{ form }}
+                {% csrf_token %}
+                <div class="actionBtnDelete">
+                <button type="submit" class="actionBtnDelete">Delete your profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
