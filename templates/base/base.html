@@ -8,30 +8,33 @@
           href="{% static 'css/style.css' %}"/>
 </head>
 <body>
-<div id="box">
-    <header>
-        <nav>
-            <img src="{% static 'images/contrast.png' %}" alt="sun">
-            <a href="{% url 'index' %}">HOME</a>
-            <ul>
+    <header class="header">
+        <div class="header-home">
+            <div class="header-logo">
+                <a href="{% url 'index' %}"><img class="header-img" src="{% static 'images/contrast.png' %}" alt="sun"></a>
+            </div>
+        </div>
+        <nav class="navigation">
+
+            <ul role="list">
                 {% if request.user.is_authenticated %}
                     <li>
                         <a href="{% url 'basket' %}">
-                            <img
+                            <img class="basket-img"
                                     src="{% static 'images/shopping-basket.png' %}"
-                                    alt="basket" style="width: 40px">
+                                    alt="basket">
                         </a>
                     </li>
-                    <li><a href="{% url 'catalogue' %}">CATALOGUE</a></li>
-                    <li><a href="{% url 'details user' pk=request.user.pk %}">PROFILE</a></li>
-                    <li><a href="{% url 'logout user' %}">LOG OUT</a></li>
+                    <li class="navigation-btn"><a href="{% url 'catalogue' %}">CATALOGUE</a></li>
+                    <li class="navigation-btn"><a href="{% url 'details user' pk=request.user.pk %}">PROFILE</a></li>
+                    <li class="navigation-btn"><a href="{% url 'logout user' %}">LOG OUT</a></li>
 
                 {% else %}
-                    <li><a href="{% url 'register user' %}">REGISTER</a></li>
-                    <li><a href="{% url 'login user' %}">LOG IN</a></li>
+                    <li class="navigation-btn"><a href="{% url 'register user' %}">REGISTER</a></li>
+                    <li class="navigation-btn"><a href="{% url 'login user' %}">LOG IN</a></li>
                 {% endif %}
                 {% if request.user.is_staff %}
-                    <li><a href="/admin">STAFF</a></li>
+                    <li class="navigation-btn"><a href="/admin">STAFF</a></li>
                 {% endif %}
 
             </ul>
@@ -47,6 +50,5 @@
             &copy;Magazin Slunce. All rights reserved.
         </div>
     </footer>
-</div>
 </body>
 </html>
