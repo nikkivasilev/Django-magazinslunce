@@ -1,29 +1,39 @@
 {% extends 'base/base.html' %}
 
 {% block page_content %}
-    <section id="catalogPage">
+    <section id="BasketPage">
         {% if products %}
-            <div class="Checkoutwrapper">
-                <p>TOTAL COST: {{ total_sum|floatformat:2 }}BGN</p>
-                <div class="btn-group">
-                    <a href="{% url 'order' %}">ORDER</a>
-                </div>
-                {% for obj in user_basket %}
-                    <div class="comment">
-                        <p class="col-1">{{ obj.product.name }}</p>
-                        <div class="actionBtn col-2 align-content-end">
-                            <a class="actionBtnDelete col-1"
-                               href="{% url 'delete product from basket' pk=obj.product.pk %}">Cancel</a>
-                            <a class="actionBtn col-2" href="{% url 'subtract from basket' pk=obj.product.pk %}">-</a>
-                            <a class="actionBtn col-3" href="{% url 'add product to basket' pk=obj.product.pk %}">+</a>
-                            <p class="col-4">{{ obj.quantity }}</p>
-                        </div>
+            <div id="CheckoutWrapper">
+                <div class="checkout-top">
+                    <h2 class="total">TOTAL COST: <span class="text-white">{{ total_sum|floatformat:2 }}BGN</span></h2>
+                    <div id="checkout-btn" class="btn-group">
+                        <a href="{% url 'order' %}">ORDER</a>
                     </div>
-                {% endfor %}
+                </div>
+
+                <ul class="checkout-products" role="list">
+                    <div class="grid-naming">
+                        <h3 class="left">NAME:</h3>
+                        <h3 class="right">QUANTITY:</h3>
+                    </div>
+                    {% for obj in user_basket %}
+                        <li class="product">
+                            <div class="product-name">
+                                <p class="name">{{ obj.product.name }}</p>
+                            </div>
+                            <div id="product-actions" class="actionBtn">
+                                <a class="actionBtnDelete"
+                                   href="{% url 'delete product from basket' pk=obj.product.pk %}">Cancel</a>
+                                <a class="actionBtn" href="{% url 'subtract from basket' pk=obj.product.pk %}">-</a>
+                                <a class="actionBtn" href="{% url 'add product to basket' pk=obj.product.pk %}">+</a>
+                            </div>
+                                <p class="product-quantity">{{ obj.quantity }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
-        {% endif %}
-        {% if products %}
             {% for object in products %}
+{#                TODO : FIX THIS#}
                 <div class="card-box">
                     <img class="ProductImg" src="{{ object.Image.url }}" alt="profile picture">
                     <div>

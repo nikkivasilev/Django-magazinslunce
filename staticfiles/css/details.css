@@ -49,21 +49,7 @@
 
 }
 
-.Basketwrapper {
-    height: fit-content;
-    width: 1000px;
-    border-radius: 7px 7px 7px 7px;
-    box-shadow: 0 0 1.5px 3px gray;
-    margin: 30px auto 200px;
-}
 
-.Checkoutwrapper {
-    height: fit-content;
-    width: 1000px;
-    border-radius: 7px 7px 7px 7px;
-    box-shadow: 0 0 1.5px 3px gray;
-    margin: 30px auto auto;
-}
 
 .commentText > textarea {
     height: 50px;
